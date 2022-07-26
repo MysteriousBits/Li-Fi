@@ -8,14 +8,14 @@
 class Transmitter
 {
 public:
-	Transmitter();
+    Transmitter();
 
-	// msg => The input message to transmit
-	void transmit(String msg);
+    // msg => The input message to transmit
+    void transmit(String msg);
 
 private:
-	void sendByte(char Byte);
-	void sendBit(bool BIT);
+    void sendByte(char Byte);
+    void sendBit(bool BIT);
 };
 
 #endif
