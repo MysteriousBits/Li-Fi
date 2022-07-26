@@ -1,6 +1,6 @@
 # Li-Fi
 Arduino based lifi communication project. Transfer data through light!  
-
+  
 Use an led to transmit data from one arduino and a ldr/photo-diode in another arduino board.  
 Upload the transmitter class in transmitter arduino and receiver class in the receiver arduino.  
   
