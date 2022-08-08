@@ -3,8 +3,10 @@
 #include "config.h"
 #include "receiver.h"
 
-Receiver::Receiver(bool (*getBitFunc)())
+Receiver::Receiver(bool (*getBitFunc)() = nullptr)
 {
+    if (!getBitFunc) getBitFunc = &getSensor;
+
     getBit = getBitFunc;
 
     Serial.println("Receiver initiated.");
@@ -19,15 +21,10 @@ String Receiver::receive()
     delay(1.5 * INTERVAL);
 
     String msg = "";
-    char Byte = 0;
 
     while(msg.length() <= MAX_LEN)
     {
-        for (int pos = 7; pos >= 0; --pos)
-        {
-            Byte |= (getBit() << pos);
-            delay(INTERVAL);
-        }
+        char Byte = getByte();
 
         if (Byte != END_BYTE) msg += Byte;
         else break;
@@ -45,4 +42,20 @@ String Receiver::receive()
     Serial.println("ms.");
 
     return msg;
+}
+
+static bool Receiver::getSensor()
+{
+    return analogRead(PIN) < THREASHOLD;
+}
+
+char Receiver::getByte()
+{
+    char Byte = 0;
+    for (int pos = 7; pos >= 0; --pos)
+    {
+        Byte |= (getBit() << pos);
+        delay(INTERVAL);
+    }
+    return Byte;
 }
