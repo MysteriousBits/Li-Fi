@@ -22,7 +22,7 @@ void Transmitter::transmit(String msg)
     unsigned long before = millis();
     sendBit(1);  // Send starting signal
     
-    for (auto Byte : msg)
+    for (char Byte : msg)
         sendByte(Byte);
 
     // Send end indicator Byte
@@ -33,7 +33,37 @@ void Transmitter::transmit(String msg)
     unsigned long after = millis();
     Serial.print("Message sent.\nSent ");
     Serial.print(msg.length());
-    Serial.print(" bytes datas in ");
+    Serial.print(" bytes data in ");
+    Serial.print(after - before);
+    Serial.println("ms.");
+}
+
+void Transmitter::sendFile(String file)
+{
+    if (file.length() > MAX_FILE_SIZE)
+    {
+        Serial.println("Can't send file. File size too big.");
+        return; 
+    }
+
+    // Signal for file start with file size
+    String msg = "";
+    msg += FILE_IND_BYTE;
+    msg += String(file.length());
+    transmit(msg);
+    // delay included at the end of transmit()
+    Serial.println("Started sending file...");
+    unsigned long before = millis();
+
+    for (char Byte : file)
+        sendByte(Byte);
+
+    sendBit(0);  // Turn off the light
+    // Logs
+    unsigned long after = millis();
+    Serial.print("File sent.\nSent ");
+    Serial.print(file.length());
+    Serial.print(" bytes data in ");
     Serial.print(after - before);
     Serial.println("ms.");
 }

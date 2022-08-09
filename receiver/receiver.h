@@ -24,6 +24,7 @@ public:
 private:
     bool (*getBit)();
     char getByte();
+    void getFile(String signal);
 };
 
 #endif

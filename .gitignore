@@ -1,0 +1,10 @@
+# Testing directory
+File_Transfer
+
+# python
+__pycache__
+
+# output
+*.jpg
+*.png
+*.txt

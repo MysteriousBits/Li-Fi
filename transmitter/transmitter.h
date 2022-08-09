@@ -10,8 +10,13 @@ class Transmitter
 public:
     Transmitter();
 
+    // Mesage transmitter method
     // msg => The input message to transmit
+    // logs => turn logging on/off
     void transmit(String msg);
+    // File transmitter method
+    // file => Byte data of binary file
+    void sendFile(String file);
 
 private:
     void sendByte(char Byte);

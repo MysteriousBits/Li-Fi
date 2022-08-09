@@ -30,6 +30,13 @@ String Receiver::receive()
         else break;
     }
 
+    // Check for file start signal
+    if (msg[0] == FILE_IND_BYTE)
+    {
+        getFile(msg);
+        return msg;
+    }
+
     // Logs
     unsigned long after = millis();
     if (msg.length() == MAX_LEN)
@@ -37,11 +44,48 @@ String Receiver::receive()
     Serial.println("Recieved message:\n" + msg);
     Serial.println("\nRecieved ");
     Serial.print(msg.length());
-    Serial.print(" bytes datas in ");
+    Serial.print(" bytes data in ");
     Serial.print(after - before);
     Serial.println("ms.");
 
     return msg;
+}
+
+void Receiver::getFile(String signal)
+{
+    // extract file size from signal
+    String size = signal;
+    size.remove(0, 1);
+    int filesize = signal.toInt();
+    if (filesize > MAX_FILE_SIZE)
+    {
+        Serial.println(size + " bytes file size is too big. File can't be received.");
+        Serial.println("Increase MAX_FILE_SIZE if you want.");
+        Serial.println("Restart the transmitter now to avoid unwanted behaviour.");
+        delay(10 * INTERVAL);
+        return;
+    }
+
+    Serial.println("Started receiving file...");
+    Serial.println("Will receive " + size + " bytes data.\n");
+    unsigned long before = millis();
+
+    // Wait till the halfway of first bit
+    delay(1.5 * INTERVAL);
+
+    String file = "";
+    while (filesize--)
+        file += getByte();
+
+    // Signal for python script to save the file
+    Serial.println(signal);
+    Serial.println(file);
+
+    // Logs
+    unsigned long after = millis();
+    Serial.println("\nRecieved " + size + " bytes data in ");
+    Serial.print(after - before);
+    Serial.println("ms.");
 }
 
 static bool Receiver::getSensor()
