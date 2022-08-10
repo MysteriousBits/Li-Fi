@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
+import tkinter.scrolledtext as tkscrolled
 
 class Gui(tk.Tk):
     def __init__(self, arduino):
@@ -13,27 +14,27 @@ class Gui(tk.Tk):
         ##### Set up UI #####
         # Window
         self.title("Lifi Transmitter")
-        self.geometry("500x450")
+        self.geometry("520x480")
 
         # Headline label
-        tk.Label(self, text = "Lifi Receiver").pack()
+        tk.Label(self, text = "Lifi Receiver", fg = "cyan", font = ("Roboto", 20, "bold")).grid(row = 0, column = 4, pady = 10)
 
         # Message entry box
-        self.msgentry = tk.Entry(self, textvariable = self.message)
-        self.msgentry.pack()
+        self.msgentry = tk.Entry(self, textvariable = self.message, width = 50)
+        self.msgentry.grid(row = 1, column = 0, columnspan = 7, padx = 5, pady = 10)
 
         # Message send button
-        tk.Button(self, text = "Send", command = self.sendmsg).pack()
+        tk.Button(self, text = "Send", command = self.sendmsg).grid(row = 1, column = 7)
 
         # File send button
-        tk.Button(self, text = "Send File", command = self.sendfile).pack()
+        tk.Button(self, text = "Send File", command = self.sendfile).grid(row = 2, column = 4, pady = 5)
 
         # Log label
-        tk.Label(self, text = "Logs: ").pack()
+        tk.Label(self, text = "Logs: ", font = (12), fg = "orange").grid(row = 4, column = 4, pady = 2)
 
         # Log box
-        self.logbox = tk.Text(self, width = 60, height = 15)
-        self.logbox.pack()
+        self.logbox = tkscrolled.ScrolledText(self, width = 50, height = 15, bg = "grey15", fg = "green2", font = "consolas")
+        self.logbox.grid(row = 5, column = 0, columnspan = 9)
 
     def sendmsg(self):
         self.arduino.send(message.get())
@@ -49,5 +50,5 @@ if __name__ == "__main__":
     print("Pleease run the main.py file.")
 
     # Test
-    gui = Gui(None)
-    gui.mainloop()
+    # gui = Gui(None)
+    # gui.mainloop()
