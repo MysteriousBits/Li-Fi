@@ -9,9 +9,10 @@ class Arduino:
         self.ser.write(Bytes.encode("utf-8"))
         print("Bytes written to arduino serial.")
 
-    def sendFile(self, dir):
+    def sendfile(self, dir):
         print("Sending file to arduino serial...")
         with open(filedir) as file:
+            self.send(file_ind_bytes)
             self.send(file.read())
 
     def log(self, textbox):

@@ -10,6 +10,7 @@ Receiver::Receiver(bool (*getBitFunc)() = nullptr)
     getBit = getBitFunc;
 
     Serial.println("Receiver initiated.");
+    Serial.println("Feel free to use the reset button in arduino if you see any unwanted behaviour (:.");
 }
 
 String Receiver::receive()
@@ -34,7 +35,7 @@ String Receiver::receive()
     if (msg[0] == FILE_IND_BYTE)
     {
         getFile(msg);
-        return msg;
+        return "Receiving file";
     }
 
     // Logs

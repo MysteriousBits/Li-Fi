@@ -1,4 +1,5 @@
 #include "receiver.h"
+#include "config.h"
 
 Receiver* receiver;
 
@@ -6,21 +7,17 @@ void setup()
 {
     Serial.begin(9600);
     Serial.print("\nHEloo\n");
-    receiver = new Receiver(&getBit);
+    receiver = new Receiver();
 }
 
 void loop()
 {
-    if (getBit())
+    if (Receiver::getSensor())
     {
         String msg = receiver->receive();
+
+        // Signal for python script
+        Serial.println(String(MSG_IND_BYTE));
+        Serial.println(msg);
     }
-}
-
-bool getBit()
-{
-    bool Bit = 0;
-    // Read sensor and process...
-
-    return Bit;
 }

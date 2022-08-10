@@ -7,7 +7,8 @@ Transmitter::Transmitter()
 {
     pinMode(PIN, OUTPUT);
     sendBit(0);
-    Serial.print("\nTransmitter initiated.\n");
+    Serial.println("\nTransmitter initiated.");
+    Serial.println("Feel free to use the reset button in arduino if you see any unwanted behaviour (:.");
 }
 
 void Transmitter::transmit(String msg)

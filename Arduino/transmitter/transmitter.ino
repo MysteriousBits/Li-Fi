@@ -1,4 +1,5 @@
 #include "transmitter.h"
+#include "config.h"
 
 Transmitter* transmitter;
 
@@ -13,6 +14,14 @@ void loop()
 {
     if (Serial.available())
     {
-        transmitter->transmit(Serial.readString());
+        String msg = Serial.readString();
+
+        // Check file
+        if (msg[0] == FILE_IND_BYTE)
+        {
+            delay(5 * INTERVAL);
+            transmitter->sendFile(Serial.readString());
+        }
+        else transmitter->transmit(msg);
     }
 }

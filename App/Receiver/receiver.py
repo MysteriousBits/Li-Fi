@@ -11,10 +11,10 @@ class Arduino:
             logs = self.ser.readline()
             logs = logs.decode("utf-8")
 
-            if logs[0] == msg_ind_bytes:
+            if logs == msg_ind_bytes:
                 self.getmsg()
                 continue
-            elif logs[0] == file_ind_bytes:
+            elif logs == file_ind_bytes:
                 self.getfile(int(logs[1:]))
                 continue
 
@@ -37,4 +37,4 @@ class Arduino:
             file.write(Bytes)
 
         print("File saved.")
-        gui.show_file(file.dir)
+        gui.show_file(filedir)
