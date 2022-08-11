@@ -5,7 +5,7 @@ Use an led to transmit data from one arduino and an ldr/photo-diode in another a
 Upload the transmitter class in transmitter arduino and receiver class in the receiver arduino.  
   
 Make sure that you have edited the `congig.h` properly in both receiver and transmitter class. See the *transmitter.h* and *reciever.h* file to know about the public members of the classes. If you use an ldr, you can easily use the default code. Otherwise you may need to write a custom function for getting binary output from the sensor and pass it to the class constructor(See the definitions in the header files).  
-To run the default code, just simply open the *transmitter.ino* or *receiver.ino* in arduino IDE and click upload. Now you can type message in the serial monitor to send or use the guy.  
+To run the default code, just simply open the *transmitter.ino* or *receiver.ino* in arduino IDE and click upload. Now you can type message in the serial monitor to send or use the GUI.  
 Note that you may have to threshold the analog input value according to the brightness of the room.    
 
 **File Transfer:** Although the data transfer rate is a bit slow, you can send small files as well.
