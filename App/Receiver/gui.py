@@ -8,28 +8,33 @@ import subprocess
 class Gui(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.bgc = "grey30"
 
         ##### Set up UI #####
         # Window
         self.title("Lifi Receiver")
         self.geometry("520x420")
+        self.configure(bg = self.bgc)
 
         # Headline label
-        tk.Label(self, text = "Lifi Receiver",  fg = "cyan", font = ("Roboto", 20, "bold")).grid(row = 0, column = 4, pady = 10)
+        tk.Label(self, text = "Lifi Receiver",  fg = "cyan", bg = self.bgc,
+            font = ("Roboto", 20, "bold")).grid(row = 0, column = 4, pady = 10)
 
         # Message label
-        self.msglbl = tk.Label(self, text = "Message: ")
-        self.msglbl.grid(row = 1, column = 1, padx = 5)
+        self.msglbl = tk.Label(self, text = "Message: ", bg = self.bgc, fg = "white")
+        self.msglbl.grid(row = 1, column = 0, columnspan = 2, padx = 10)
 
         # Message box
-        self.msgbox = tk.Text(self, width = 40, height = 1)
-        self.msgbox.grid(row = 1, column = 2, columnspan = 6, pady = 5)
+        self.msgbox = tk.Text(self, width = 50, height = 1, bg = self.bgc, fg = "white")
+        self.msgbox.grid(row = 1, column = 2, columnspan = 7, pady = 5)
 
         # Log label
-        tk.Label(self, text = "Logs: ", font = (12), fg = "orange").grid(row = 2, column = 4, pady = 2)
+        tk.Label(self, text = "Logs: ", font = (12), fg = "orange", bg = self.bgc).grid(
+            row = 2, column = 4, pady = 2)
 
         # Log box
-        self.logbox = tkscrolled.ScrolledText(self, width = 50, height = 15, bg = "grey15", fg = "green2", font = "consolas")
+        self.logbox = tkscrolled.ScrolledText(self, width = 50, height = 15,
+            bg = "grey15", fg = "green2", font = "consolas")
         self.logbox.grid(row = 3, column = 0, columnspan = 9)
 
     def show_msg(self, msg):
@@ -55,7 +60,7 @@ class Gui(tk.Tk):
 
 
 if __name__ == "__main__":
-    print("Pleease run the main.py file.")
+    print("Please run the main.py file.")
 
     # Test
     # gui = Gui()
