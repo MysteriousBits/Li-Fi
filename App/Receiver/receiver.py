@@ -1,13 +1,16 @@
 import serial
-import config
+from config import *
+import time
 
 class Arduino:
     def __init__(self, gui):
         self.ser = serial.Serial(port = port, baudrate = 9600, timeout = 0.1)
         self.gui = gui
+        self.synced = True
 
     def sync(self):
-        while True:
+        time.sleep(1)
+        while synced:
             logs = self.ser.readline()
             logs = logs.decode("utf-8")
 
@@ -37,4 +40,4 @@ class Arduino:
             file.write(Bytes)
 
         print("File saved.")
-        gui.show_file(filedir)
+        self.gui.show_file(filedir)
