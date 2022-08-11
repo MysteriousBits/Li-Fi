@@ -1,5 +1,6 @@
 import gui
 import receiver
+from threading import Thread
 
 app = gui.Gui()
 try:
@@ -9,5 +10,8 @@ except:
     quit()
 
 # Run the receiver and gui in 2 seperate threads
-app.after(1, arduino.sync)
+thread = Thread(target = arduino.sync)
+thread.start()
 app.mainloop()
+# Stop the thread
+arduino.synced = False

@@ -1,5 +1,6 @@
 import gui
 import sender
+from threading import Thread
 
 try:
     arduino = sender.Arduino()
@@ -10,5 +11,8 @@ except:
 app = gui.Gui(arduino)
 
 # Run the gui and logger in 2 seperate threads
-app.after(1, lambda: arduino.log(app.logbox))
+logger = Thread(target = arduino.log, args = (app.logbox,))
+logger.start()
 app.mainloop()
+# Stop the thread
+arduino.logging = False
