@@ -10,7 +10,7 @@ Receiver::Receiver(bool (*getBitFunc)() = nullptr)
     getBit = getBitFunc;
 
     Serial.println("Receiver initiated.");
-    Serial.println("Feel free to use the reset button in arduino if you see any unwanted behaviour (:.");
+    Serial.println("Feel free to use the reset button in arduino if you see any unwanted behaviour (:");
 }
 
 String Receiver::receive()
@@ -23,7 +23,7 @@ String Receiver::receive()
 
     String msg = "";
 
-    while(msg.length() <= MAX_LEN)
+    while(msg.length() < MAX_LEN)
     {
         char Byte = getByte();
 
@@ -58,6 +58,7 @@ void Receiver::getFile(String signal)
     String size = signal;
     size.remove(0, 1);
     int filesize = signal.toInt();
+
     if (filesize > MAX_FILE_SIZE)
     {
         Serial.println(size + " bytes file size is too big. File can't be received.");
@@ -91,7 +92,7 @@ void Receiver::getFile(String signal)
 
 static bool Receiver::getSensor()
 {
-    return analogRead(PIN) < THREASHOLD;
+    return analogRead(PIN) < THRESHOLD;
 }
 
 char Receiver::getByte()

@@ -15,7 +15,7 @@ void Transmitter::transmit(String msg)
 {
     if (msg.length() > MAX_LEN)
     {
-        Serial.print("\nString size too big.\n");
+        Serial.println("String size too big.");
         return;
     }
 
@@ -72,7 +72,7 @@ void Transmitter::sendFile(String file)
 void Transmitter::sendByte(char Byte)
 {
     for (int pos = 7; pos >= 0; --pos)
-    sendBit(Byte & (1 << pos));
+        sendBit(Byte & (1 << pos));
 }
 
 void Transmitter::sendBit(bool Bit)

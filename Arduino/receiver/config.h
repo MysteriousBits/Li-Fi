@@ -9,7 +9,7 @@ Make sure the values match with the transmitter class.
 #define CONFIG_H
 
 #define PIN A0  // Input pin of transmitter led.
-#define THREASHOLD 800  // Threashold for ldr (if used), greater = 0 and smaller = 1.
+#define THRESHOLD 800  // THRESHOLD for ldr (if used), greater = 0 and smaller = 1.
 #define INTERVAL 10  // Delay time(in ms) between two bits
 #define END_BYTE '\x04'  // Indicator byte(ASCII char) for string end
 #define FILE_IND_BYTE '\x05'  // Indicator byte(ASCII char) for file start
