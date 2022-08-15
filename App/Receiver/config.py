@@ -5,3 +5,5 @@ port = "/dev/ttyACM0"
 file_ind_bytes = "\x05"
 # Message indicator bytes set in arduino
 msg_ind_bytes = "\x06"
+# Waiting time (in second) for serial read function
+wait = 0.2

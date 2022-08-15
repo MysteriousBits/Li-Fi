@@ -4,25 +4,21 @@ import time
 
 class Arduino:
     def __init__(self, gui):
-        self.ser = serial.Serial(port = port, baudrate = 9600, timeout = 0.1)
+        self.ser = serial.Serial(port = port, baudrate = 9600, timeout = wait)
         self.gui = gui
         self.synced = True
 
     def sync(self):
         time.sleep(1)
-        while synced:
+        while self.synced:
             logs = self.ser.readline()
             logs = logs.decode("utf-8")
 
-            if logs == msg_ind_bytes:
+            if logs.startswith(msg_ind_bytes):
                 self.getmsg()
-                continue
-            elif logs == file_ind_bytes:
-                self.getfile(int(logs[1:]))
-                continue
-
-            if logs != None:
-                logs += "\n"
+            elif logs.startswith(file_ind_bytes):
+                self.getfile(int(logs[1:-1]))
+            elif logs != "":
                 self.gui.logbox.insert("end", logs)
 
     def getmsg(self):

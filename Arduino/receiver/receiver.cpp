@@ -35,13 +35,14 @@ String Receiver::receive()
     if (msg[0] == FILE_IND_BYTE)
     {
         getFile(msg);
-        return "Receiving file";
+        return "Receiving file...";
     }
 
     // Logs
     unsigned long after = millis();
     if (msg.length() == MAX_LEN)
         Serial.println("Maximum message length reached.");
+        Serial.println("You can reset the arduinos if you see any unwanted behaviour.");
     Serial.println("Recieved message:\n" + msg);
     Serial.println("\nRecieved ");
     Serial.print(msg.length());
@@ -63,7 +64,7 @@ void Receiver::getFile(String signal)
     {
         Serial.println(size + " bytes file size is too big. File can't be received.");
         Serial.println("Increase MAX_FILE_SIZE if you want.");
-        Serial.println("Restart the transmitter now to avoid unwanted behaviour.");
+        Serial.println("Reset the transmitter arduino now to avoid unwanted behaviour.");
         delay(10 * INTERVAL);
         return;
     }

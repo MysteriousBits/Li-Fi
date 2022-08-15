@@ -4,7 +4,7 @@ import time
 
 class Arduino:
     def __init__(self):
-        self.ser = serial.Serial(port = port, baudrate = 9600, timeout = 0.1)
+        self.ser = serial.Serial(port = port, baudrate = 9600, timeout = wait)
         self.logging = True
         
     def send(self, Bytes):
@@ -15,13 +15,15 @@ class Arduino:
         print("Sending file to arduino serial...")
         with open(filedir) as file:
             self.send(file_ind_bytes)
+            # Let arduino read the start signal first
+            time.sleep(0.01)
             self.send(file.read())
+        print("File sent.")
 
     def log(self, logbox):
         time.sleep(1)
-        while logging:
+        while self.logging:
             logs = self.ser.readline()
             logs = logs.decode("utf-8")
-            if logs != None:
-                logs += "\n"
+            if logs != "":
                 logbox.insert("end", logs)
