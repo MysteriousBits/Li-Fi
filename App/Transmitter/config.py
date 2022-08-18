@@ -5,3 +5,5 @@ port = "COM3"
 file_ind_bytes = "\x05"
 # Waiting time (in second) for serial-read function
 wait = 0.2
+# Delay after sending file start signal(in ms)
+file_start_delay = 0.01

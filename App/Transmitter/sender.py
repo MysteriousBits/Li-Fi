@@ -8,15 +8,17 @@ class Arduino:
         self.logging = True
         
     def send(self, Bytes):
-        self.ser.write(Bytes.encode("utf-8"))
+        if type(Bytes) == str:
+            Bytes = Bytes.encode("utf-8")
+        self.ser.write(Bytes)
         print("Bytes written to arduino serial.")
 
     def sendfile(self, filedir):
         print("Sending file to arduino serial...")
-        with open(filedir) as file:
+        with open(filedir, 'rb') as file:
             self.send(file_ind_bytes)
             # Let arduino read the start signal first
-            time.sleep(0.01)
+            time.sleep(file_start_dalay)
             self.send(file.read())
         print("File sent.")
 
@@ -24,6 +26,6 @@ class Arduino:
         time.sleep(1)
         while self.logging:
             logs = self.ser.readline()
-            logs = logs.decode("utf-8")
+            logs = logs.decode("utf-8", errors = 'ignore')
             if logs != "":
                 logbox.insert("end", logs)

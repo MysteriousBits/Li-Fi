@@ -53,7 +53,7 @@ void Transmitter::sendFile(String file)
     msg += String(file.length());
     transmit(msg);
     // delay included at the end of transmit()
-    Serial.println("Started sending file...");
+    Serial.println("Sending file...");
     unsigned long before = millis();
 
     for (char Byte : file)

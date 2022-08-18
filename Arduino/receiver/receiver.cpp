@@ -58,7 +58,7 @@ void Receiver::getFile(String signal)
     // extract file size from signal
     String size = signal;
     size.remove(0, 1);
-    int filesize = signal.toInt();
+    int filesize = size.toInt();
 
     if (filesize > MAX_FILE_SIZE)
     {
@@ -73,8 +73,11 @@ void Receiver::getFile(String signal)
     Serial.println("Will receive " + size + " bytes data.\n");
     unsigned long before = millis();
 
-    // Wait till the halfway of first bit
-    delay(1.5 * INTERVAL);
+    // this function is called at the halfway of
+    // the last bit of the signal message.
+    // Then transmitter will delay one more time and start sending file.
+    // So we need to wait twice the delay time to reach the halfway of first bit.
+    delay(2 * INTERVAL);
 
     String file = "";
     while (filesize--)

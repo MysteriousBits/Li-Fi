@@ -20,7 +20,7 @@ public:
 
 private:
     void sendByte(char Byte);
-    void sendBit(bool BIT);
+    void sendBit(bool Bit);
 };
 
 #endif
