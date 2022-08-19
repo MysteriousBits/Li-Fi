@@ -35,7 +35,7 @@ String Receiver::receive()
     if (msg[0] == FILE_IND_BYTE)
     {
         getFile(msg);
-        return "Receiving file...";
+        return "File";
     }
 
     // Logs

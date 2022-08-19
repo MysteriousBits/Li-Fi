@@ -29,13 +29,20 @@ class Gui(tk.Tk):
         self.msgbox.grid(row = 1, column = 2, columnspan = 7, pady = 5)
 
         # Log label
-        tk.Label(self, text = "Logs: ", font = (12), fg = "orange", bg = self.bgc).grid(
-            row = 2, column = 4, pady = 2)
+        tk.Label(self, text = "Logs: ", font = ("Helvetica", 14), fg = "orange",
+            bg = self.bgc).grid(row = 2, column = 4, pady = 2)
+
+        # Log clear button
+        tk.Button(self, text = "Clear", font = ("Roboto", 8), bg = self.bgc, fg = "white",
+            width = 4, height = 1, command = self.clear_log).grid(row = 2, column = 8)
 
         # Log box
         self.logbox = tkscrolled.ScrolledText(self, width = 50, height = 15,
             bg = "grey15", fg = "green2", font = "consolas")
         self.logbox.grid(row = 3, column = 0, columnspan = 9)
+
+    def clear_log(self):
+        self.logbox.delete(1.0, tk.END)
 
     def show_msg(self, msg):
         self.msgbox.delete(1.0, tk.END)

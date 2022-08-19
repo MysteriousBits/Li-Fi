@@ -6,7 +6,7 @@ Transmitter* transmitter;
 void setup()
 {
     Serial.begin(9600);
-    Serial.print("\nHEloo\n");
+    Serial.print("HEloo\n");
     transmitter = new Transmitter();
 }
 
@@ -19,7 +19,7 @@ void loop()
         // Check file
         if (msg[0] == FILE_IND_BYTE)
         {
-            delay(5 * INTERVAL);
+            delay(20 * INTERVAL);
             transmitter->sendFile(Serial.readString());
         }
         else transmitter->transmit(msg);

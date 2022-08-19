@@ -12,7 +12,7 @@ class Arduino:
         time.sleep(1)
         while self.synced:
             logs = self.ser.readline()
-            logs = logs.decode("utf-8", errors = 'ignore')
+            logs = logs.decode('latin-1')
 
             if logs.startswith(msg_ind_bytes):
                 self.getmsg()
@@ -24,11 +24,12 @@ class Arduino:
     def getmsg(self):
         print("Reading message...")
         msg = self.ser.readline()
-        msg = msg.decode("utf-8", errors = 'ignore')
+        msg = msg.decode('latin-1')
         self.gui.show_msg(msg[:-1])
 
     def getfile(self, size):
         print("Reading file...")
+        time.sleep(1)
         Bytes = self.ser.read(size)
         filedir = self.gui.get_save_dir()
 

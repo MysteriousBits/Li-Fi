@@ -15,7 +15,7 @@ class Gui(tk.Tk):
         ##### Set up UI #####
         # Window
         self.title("Lifi Transmitter")
-        self.geometry("520x480")
+        self.geometry("530x480")
         self.configure(bg = self.bgc)
 
         # Headline label
@@ -35,13 +35,20 @@ class Gui(tk.Tk):
             command = self.sendfile).grid(row = 2, column = 4, pady = 5)
 
         # Log label
-        tk.Label(self, text = "Logs: ", font = (12), bg = self.bgc, fg = "orange").grid(
-            row = 4, column = 4, pady = 2)
+        tk.Label(self, text = "Logs: ", font = ("Helvetica", 14), fg = "orange",
+            bg = self.bgc).grid(row = 4, column = 4, pady = 2)
+
+        # Log clear button
+        tk.Button(self, text = "Clear", font = ("Roboto", 8), bg = self.bgc, fg = "white",
+            width = 4, height = 1, command = self.clear_log).grid(row = 4, column = 8)
 
         # Log box
         self.logbox = tkscrolled.ScrolledText(self, width = 50, height = 15, bg = "grey12",
             fg = "green2", font = "consolas")
         self.logbox.grid(row = 5, column = 0, columnspan = 9)
+
+    def clear_log(self):
+        self.logbox.delete(1.0, tk.END)
 
     def sendmsg(self):
         self.arduino.send(self.message.get())

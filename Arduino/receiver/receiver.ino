@@ -6,7 +6,7 @@ Receiver* receiver;
 void setup()
 {
     Serial.begin(9600);
-    Serial.print("\nHEloo\n");
+    Serial.print("HEloo\n");
     receiver = new Receiver();
 }
 

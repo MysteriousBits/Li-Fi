@@ -14,7 +14,7 @@ For this, some useful python scripts are included with a simple gui.
 ### App
 Arduino can't read file from your disk. So you need some scripts to send the file to arduino's serial so that it can read the file. The app will do this for you. Also it has a simple guy to make things easier.    
 
-To run the app, You need 2 PCs, one for receiver and one for transmitter. First install python and then the required modules: run `pip install pyserial` in both machines.  
+To run the app, You need 2 PCs, one for receiver and one for transmitter. First install python3.x and then the required modules: run `pip install pyserial` in both machines.  
 Now connect arduino and upload the arduino code. Then go to the *App/Transmitter* or *App/Receiver* directory, edit the *config.py* files and run *main.py* file. You will see a gui window appear. It will show the logs from the arduino as well the messages. 
 You can use the send file or send message button in transmitter to send data. The receiver will automatically show messages or ask you to save file if received.
    
