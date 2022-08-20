@@ -15,4 +15,4 @@ logger = Thread(target = arduino.log, args = (app.logbox,))
 logger.start()
 app.mainloop()
 # Stop the thread
-arduino.logging = False
+arduino.stop()

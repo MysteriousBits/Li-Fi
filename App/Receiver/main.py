@@ -14,4 +14,4 @@ thread = Thread(target = arduino.sync)
 thread.start()
 app.mainloop()
 # Stop the thread
-arduino.synced = False
+arduino.stop()

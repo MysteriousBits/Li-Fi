@@ -3,7 +3,7 @@ import tkinter.scrolledtext as tkscrolled
 from tkinter import filedialog
 from tkinter import messagebox
 import sys
-import subprocess
+import os
 
 class Gui(tk.Tk):
     def __init__(self):
@@ -22,15 +22,15 @@ class Gui(tk.Tk):
 
         # Message label
         self.msglbl = tk.Label(self, text = "Message: ", bg = self.bgc, fg = "white")
-        self.msglbl.grid(row = 1, column = 0, columnspan = 2, padx = 10)
+        self.msglbl.grid(row = 1, column = 0, columnspan = 2, padx = 2)
 
         # Message box
         self.msgbox = tk.Text(self, width = 50, height = 1, bg = self.bgc, fg = "white")
-        self.msgbox.grid(row = 1, column = 2, columnspan = 7, pady = 5)
+        self.msgbox.grid(row = 1, column = 2, columnspan = 7, pady = 10)
 
         # Log label
-        tk.Label(self, text = "Logs: ", font = ("Helvetica", 14), fg = "orange",
-            bg = self.bgc).grid(row = 2, column = 4, pady = 2)
+        tk.Label(self, text = "Logs: ", font = ("Helvetica", 13, "bold"), fg = "#F79C91",
+            bg = self.bgc).grid(row = 2, column = 0, pady = 1)
 
         # Log clear button
         tk.Button(self, text = "Clear", font = ("Roboto", 8), bg = self.bgc, fg = "white",
@@ -58,7 +58,7 @@ class Gui(tk.Tk):
                 opener = "xdg-open "
             elif sys.platform == "darwin":
                 opener = "open "
-            subprocess.Popen(opener + filedir, shell = True)
+            os.system(opener + filedir)
 
 
     def get_save_dir(self):
@@ -70,5 +70,5 @@ if __name__ == "__main__":
     print("Please run the main.py file.")
 
     # Test
-    # gui = Gui()
-    # gui.mainloop()
+    gui = Gui()
+    gui.mainloop()

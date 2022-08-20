@@ -24,19 +24,19 @@ class Gui(tk.Tk):
 
         # Message entry box
         self.msgentry = tk.Entry(self, textvariable = self.message, width = 50, bg = self.bgc, fg = "white")
-        self.msgentry.grid(row = 1, column = 0, columnspan = 7, padx = 5, pady = 10)
+        self.msgentry.grid(row = 1, column = 0, columnspan = 8, padx = 2, pady = 10)
 
         # Message send button
         tk.Button(self, text = "Send", bg = self.bgc, fg = "white",
-            command = self.sendmsg).grid(row = 1, column = 7)
+            command = self.sendmsg).grid(row = 1, column = 8)
 
         # File send button
         tk.Button(self, text = "Send File", bg = self.bgc, fg = "white",
             command = self.sendfile).grid(row = 2, column = 4, pady = 5)
 
         # Log label
-        tk.Label(self, text = "Logs: ", font = ("Helvetica", 14), fg = "orange",
-            bg = self.bgc).grid(row = 4, column = 4, pady = 2)
+        tk.Label(self, text = "Logs: ", font = ("Helvetica", 13, "bold"), fg = "#F79C91",
+            bg = self.bgc).grid(row = 4, column = 0, pady = 1)
 
         # Log clear button
         tk.Button(self, text = "Clear", font = ("Roboto", 8), bg = self.bgc, fg = "white",
@@ -64,5 +64,5 @@ if __name__ == "__main__":
     print("Please run the main.py file.")
 
     # Test
-    # gui = Gui(None)
-    # gui.mainloop()
+    gui = Gui(None)
+    gui.mainloop()

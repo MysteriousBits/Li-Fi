@@ -38,3 +38,8 @@ class Arduino:
 
         print("File saved.")
         self.gui.show_file(filedir)
+
+    def stop(self):
+        self.synced = False
+        time.sleep(0.5)
+        self.ser.close()

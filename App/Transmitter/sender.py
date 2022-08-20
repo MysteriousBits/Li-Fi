@@ -29,3 +29,8 @@ class Arduino:
             logs = logs.decode('latin-1')
             if logs != "":
                 logbox.insert("end", logs)
+
+    def stop(self):
+        self.logging = False
+        time.sleep(0.5)
+        self.ser.close()
