@@ -64,5 +64,5 @@ if __name__ == "__main__":
     print("Please run the main.py file.")
 
     # Test
-    gui = Gui(None)
-    gui.mainloop()
+    # gui = Gui(None)
+    # gui.mainloop()
