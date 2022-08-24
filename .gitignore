@@ -8,3 +8,6 @@ __pycache__
 *.jpg
 *.png
 *.txt
+
+# Send file test
+!filetst.png
