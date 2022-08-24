@@ -52,8 +52,10 @@ class Gui(tk.Tk):
         reply = messagebox.askquestion("Show file", "File has been saved successfully.\nDo you want to open it now?")
         if reply == "yes":
             # Cross platform
-            # Only writting the directory is enough in windows
             opener = ""
+            if sys.platform == "win32":
+                os.startfile(filefir)
+                return
             if sys.platform == "linux":
                 opener = "xdg-open "
             elif sys.platform == "darwin":
