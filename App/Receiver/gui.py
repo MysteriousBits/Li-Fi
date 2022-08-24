@@ -63,6 +63,9 @@ class Gui(tk.Tk):
 
     def get_save_dir(self):
         savedir = filedialog.asksaveasfilename(title = "Give file name with correct extension")
+        if savedir == None:
+            messagebox.showwarning(title = "Whoops!", message = "File not saved! Enter a valid save directory.")
+            return None
         return savedir
 
 

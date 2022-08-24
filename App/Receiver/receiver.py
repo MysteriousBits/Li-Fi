@@ -33,6 +33,10 @@ class Arduino:
         Bytes = self.ser.read(size)
         filedir = self.gui.get_save_dir()
 
+        if filedir == None:
+            print("File not saved.")
+            return
+
         with open(filedir, "wb") as file:
             file.write(Bytes)
 
