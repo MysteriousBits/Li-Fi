@@ -54,7 +54,7 @@ class Gui(tk.Tk):
             # Cross platform
             opener = ""
             if sys.platform == "win32":
-                os.startfile(filefir)
+                os.startfile(filedir)
                 return
             if sys.platform == "linux":
                 opener = "xdg-open "
@@ -65,7 +65,7 @@ class Gui(tk.Tk):
 
     def get_save_dir(self):
         savedir = filedialog.asksaveasfilename(title = "Give file name with correct extension")
-        if savedir == None:
+        if savedir == "":
             messagebox.showwarning(title = "Whoops!", message = "File not saved! Enter a valid save directory.")
             return None
         return savedir
