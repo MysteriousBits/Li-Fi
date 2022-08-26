@@ -16,7 +16,7 @@ public:
     void transmit(String msg);
     // File transmitter method
     // file => Byte data of binary file
-    void sendFile(String file);
+    void sendFile(int size);
 
 private:
     void sendByte(char Byte);

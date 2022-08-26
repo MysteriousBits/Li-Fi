@@ -39,31 +39,39 @@ void Transmitter::transmit(String msg)
     Serial.println("ms.");
 }
 
-void Transmitter::sendFile(String file)
+void Transmitter::sendFile(int size)
 {
-    if (file.length() > MAX_FILE_SIZE)
+    if (size > MAX_FILE_SIZE)
     {
         Serial.println("Can't send file. File size too big.");
+        Serial.println("Restart the arduino to avoid unwanted behaviour.");
+        delay(10 * INTERVAL);
         return; 
     }
+
+    Serial.println("Reading file.");
+    byte *file = new byte[size];
+    for (int i = 0; i < size; ++i)
+        file[i] = Serial.read();
 
     // Signal for file start with file size
     String msg = "";
     msg += FILE_IND_BYTE;
-    msg += String(file.length());
+    msg += String(size);
     transmit(msg);
     // delay included at the end of transmit()
     Serial.println("\nSending file...");
     unsigned long before = millis();
 
-    for (char Byte : file)
-        sendByte(Byte);
+    for (int i = 0; i < size; ++i)
+        sendByte(file[i]);
 
+    delete[] file;
     sendBit(0);  // Turn off the light
     // Logs
     unsigned long after = millis();
     Serial.print("File sent.\nSent ");
-    Serial.print(file.length());
+    Serial.print(String(size));
     Serial.print(" bytes data in ");
     Serial.print(after - before);
     Serial.println("ms.");

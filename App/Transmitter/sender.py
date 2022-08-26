@@ -16,10 +16,11 @@ class Arduino:
     def sendfile(self, filedir):
         print("Sending file to arduino serial...")
         with open(filedir, 'rb') as file:
-            self.send(file_ind_bytes)
+            Bytes = file.read()
+            self.send(file_ind_bytes + str(len(Bytes)))
             # Let arduino read the start signal first
             time.sleep(file_start_delay)
-            self.send(file.read())
+            self.send(Bytes)
         print("File sent.")
 
     def log(self, logbox):

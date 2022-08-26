@@ -19,8 +19,11 @@ void loop()
         // Check file
         if (msg[0] == FILE_IND_BYTE)
         {
-            delay(20 * INTERVAL);
-            transmitter->sendFile(Serial.readString());
+            msg.remove(0, 1);
+            // Extract file size from signal
+            int size = msg.toInt();
+            delay(1);
+            transmitter->sendFile(size);
         }
         else transmitter->transmit(msg);
     }

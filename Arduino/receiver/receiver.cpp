@@ -79,13 +79,14 @@ void Receiver::getFile(String signal)
     // So we need to wait twice the delay time to reach the halfway of first bit.
     delay(2 * INTERVAL);
 
-    String file = "";
-    while (filesize--)
-        file += getByte();
+    byte* file = new byte[filesize];
+    for (int i = 0; i < filesize; ++i)
+        file[i] = getByte();
 
     // Signal for python script to save the file
     Serial.println(signal);
-    Serial.println(file);
+    Serial.write(file, filesize);
+    delete[] file;
 
     // Logs
     unsigned long after = millis();
