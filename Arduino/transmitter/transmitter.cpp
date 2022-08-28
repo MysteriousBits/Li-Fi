@@ -39,9 +39,9 @@ void Transmitter::transmit(String msg)
     Serial.println("ms.");
 }
 
-void Transmitter::sendFile(int size)
+void Transmitter::sendFile(int Size)
 {
-    if (size > MAX_FILE_SIZE)
+    if (Size > MAX_FILE_SIZE)
     {
         Serial.println("Can't send file. File size too big.");
         Serial.println("Restart the arduino to avoid unwanted behaviour.");
@@ -50,20 +50,29 @@ void Transmitter::sendFile(int size)
     }
 
     Serial.println("Reading file.");
-    byte *file = new byte[size];
-    for (int i = 0; i < size; ++i)
+    byte *file = new byte[Size];
+
+    // Wait till the first byte
+    while (!Serial.available());
+
+    for (int i = 0; i < Size; ++i)
+    {
         file[i] = Serial.read();
+        // Wait till the next byte if it wasn't the last one.
+        while (!Serial.available() && i < size - 1);
+    }
+
 
     // Signal for file start with file size
     String msg = "";
     msg += FILE_IND_BYTE;
-    msg += String(size);
+    msg += String(Size);
     transmit(msg);
     // delay included at the end of transmit()
     Serial.println("\nSending file...");
     unsigned long before = millis();
 
-    for (int i = 0; i < size; ++i)
+    for (int i = 0; i < Size; ++i)
         sendByte(file[i]);
 
     delete[] file;
@@ -71,7 +80,7 @@ void Transmitter::sendFile(int size)
     // Logs
     unsigned long after = millis();
     Serial.print("File sent.\nSent ");
-    Serial.print(String(size));
+    Serial.print(String(Size));
     Serial.print(" bytes data in ");
     Serial.print(after - before);
     Serial.println("ms.");

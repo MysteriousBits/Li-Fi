@@ -56,13 +56,13 @@ String Receiver::receive()
 void Receiver::getFile(String signal)
 {
     // extract file size from signal
-    String size = signal;
-    size.remove(0, 1);
-    int filesize = size.toInt();
+    String Size = signal;
+    Size.remove(0, 1);
+    int filesize = Size.toInt();
 
     if (filesize > MAX_FILE_SIZE)
     {
-        Serial.println(size + " bytes file size is too big. File can't be received.");
+        Serial.println(Size + " bytes file Size is too big. File can't be received.");
         Serial.println("Increase MAX_FILE_SIZE if you want.");
         Serial.println("Reset the transmitter arduino now to avoid unwanted behaviour.");
         delay(10 * INTERVAL);
@@ -70,7 +70,7 @@ void Receiver::getFile(String signal)
     }
 
     Serial.println("Started receiving file...");
-    Serial.println("Will receive " + size + " bytes data.\n");
+    Serial.println("Will receive " + Size + " bytes data.\n");
     unsigned long before = millis();
 
     // this function is called at the halfway of
@@ -90,7 +90,7 @@ void Receiver::getFile(String signal)
 
     // Logs
     unsigned long after = millis();
-    Serial.println("\nRecieved " + size + " bytes data in ");
+    Serial.println("\n\nRecieved " + Size + " bytes data in ");
     Serial.print(after - before);
     Serial.println("ms.");
 }
