@@ -5,6 +5,7 @@ Arduino based lifi communication project. Transfer data through light!
     
 Use an led to transmit data from one arduino and an ldr/photo-diode in another arduino to receive.  
 Upload the transmitter class in transmitter arduino and receiver class in the receiver arduino.  
+![Diagram](Lifi-diagram.png)
   
 Make sure that you have edited the *config.h* properly in both receiver and transmitter class. See the *transmitter.h* and *reciever.h* file to know about the public members of the classes. If you use an ldr, you can easily use the default code. Otherwise you may need to write a custom function for getting binary output from the sensor and pass it to the class constructor(See the definitions in the header files).  
 To run the default code, just simply open the *transmitter.ino* or *receiver.ino* in arduino IDE and click upload. Now you can type message in the serial monitor to send or use the GUI.  

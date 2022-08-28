@@ -5,8 +5,6 @@ Testing
 __pycache__
 
 # output
-*.jpg
-*.png
 *.txt
 
 # Send file test
